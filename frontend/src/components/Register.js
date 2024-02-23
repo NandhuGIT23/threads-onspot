@@ -12,14 +12,14 @@ const Register = () => {
   const [UPI, setUPI] = useState("");
   const [name, setName] = useState("");
   const [department, setDepartment] = useState("");
-  const [college, setCollege] = useState("");
+  // const [college, setCollege] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState(null);
   const [showHiddenDiv, setShowHiddenDiv] = useState(false);
   const [showHiddenDiv2, setShowHiddenDiv2] = useState(false);
   const [checked, setChecked] = useState(false);
   const [checked2, setChecked2] = useState(false);
-  const [selectedCollege, setSelectedCollege] = useState("Sona College Of Technology");
+  const [selectedCollege, setSelectedCollege] = useState("");
   const [selectedEvents, setSelectedEvents] = useState(false);
   const [selectedWorkshops, setSelectedWorkshops] = useState("");
   const [selectedYear, setSelectedYear] = useState("1");
@@ -40,7 +40,6 @@ const Register = () => {
       setShowHiddenDiv(false);
     } else {
       setShowHiddenDiv(true);
-      setSelectedCollege(college);
     }
     setShowHiddenDiv2(checked2);
     if (!checked2) {
@@ -66,7 +65,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(selectedPayment);
+    console.log(selectedPayment, selectedWorkshops);
 
     const details = {
       name,
@@ -79,6 +78,7 @@ const Register = () => {
       selectedYear,
       selectedPayment,
     };
+    console.log(details);
 
     const response = await fetch("http://localhost:4000/admin/register", {
       method: "POST",
@@ -88,8 +88,9 @@ const Register = () => {
       },
     });
     console.log(details);
-
-    alert("successful");
+    if (response) {
+      alert("successful");
+    }
   };
 
   return (
@@ -97,10 +98,11 @@ const Register = () => {
       <div style={{}}>
         <nav className="navbar navbar-expand-lg navbar-light bg-dark d-flex justify-content-center">
           <a className="navbar-brand text-warning" href="/">
-            <img src={logo} style={{ width: "35px" }} alt="" />THREADS'24
+            <img src={logo} style={{ width: "35px" }} alt="" />
+            THREADS'24
           </a>
 
-          <p className="h4 text-warning ">Onsport Registration Form</p>
+          <p className="h4 text-warning ">Onspot Registration Form</p>
         </nav>
       </div>
 
@@ -113,96 +115,145 @@ const Register = () => {
           fontWeight: "bolder",
         }}
       >
-      <div >
-      
-         
-          <form 
-            action="#"
-            id="workshopRegis"
-            onSubmit={handleSubmit}
-            
-          >
+        <div>
+          <form action="#" id="workshopRegis" onSubmit={handleSubmit}>
             <div class="form-row my-3">
               <div class="form-group col-md-6">
                 <label for="canditateName">Name</label>
-                <input type="text" id="canditateName" class="form-control" onChange={(e) => setName(e.target.value)} value={name} required placeholder="Enter Name"/>
+                <input
+                  type="text"
+                  id="canditateName"
+                  class="form-control"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  required
+                  placeholder="Enter Name"
+                />
               </div>
               <div class="form-group col-md-6">
                 <label htmlFor="contactNo">Contact</label>
-                <input type="tel" required id="contactNo" class="form-control"  maxLength="10" minLength="10" onChange={(e) => setNumber(e.target.value)} value={number} placeholder="Enter Mobile Number"/>
+                <input
+                  type="tel"
+                  required
+                  id="contactNo"
+                  class="form-control"
+                  maxLength="10"
+                  minLength="10"
+                  onChange={(e) => setNumber(e.target.value)}
+                  value={number}
+                  placeholder="Enter Mobile Number"
+                />
               </div>
             </div>
 
             <div class="form-row my-3">
               <div class="form-group col-md-6">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" class="form-control" onChange={(e) => setEmail(e.target.value)} value={email} required placeholder="Enter Email"/>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  required
+                  placeholder="Enter Email"
+                />
               </div>
               <div class="form-group col-md-6">
                 <label htmlFor="clgName">Collage Name</label>
-                <input type="text" required  id="clgName" class="form-control"  onChange={(e) => setCollege(e.target.value)} value={college} placeholder="Enter College name"/>
+                <input
+                  type="text"
+                  required
+                  id="clgName"
+                  class="form-control"
+                  onChange={(e) => setSelectedCollege(e.target.value)}
+                  value={selectedCollege}
+                  placeholder="Enter College name"
+                />
               </div>
             </div>
 
             <div class="form-row my-3">
               <div class="form-group col-md-6">
                 <label htmlFor="dept">Department</label>
-                <input type="text" id="dept" class="form-control" onChange={(e) => setDepartment(e.target.value)} value={department} required placeholder="Enter Department"/>
+                <input
+                  type="text"
+                  id="dept"
+                  class="form-control"
+                  onChange={(e) => setDepartment(e.target.value)}
+                  value={department}
+                  required
+                  placeholder="Enter Department"
+                />
               </div>
               <div class="form-group col-md-6">
-                  <label for="year">year</label>
-                  <select class="form-control" id="year" onChange={(e) => setSelectedYear(e.target.value)} >
-                    <option value="" selected disabled>Select Year</option>
-                    <option value="1">1 st</option>
-                    <option value="2">2 nd</option>
-                    <option value="3">3 rd</option>
-                    <option value="4">4 th</option>
-                    
-                  </select>
-                </div>
+                <label for="year">year</label>
+                <select
+                  class="form-control"
+                  id="year"
+                  onChange={(e) => setSelectedYear(e.target.value)}
+                >
+                  <option value="" selected disabled>
+                    Select Year
+                  </option>
+                  <option value="1">1 st</option>
+                  <option value="2">2 nd</option>
+                  <option value="3">3 rd</option>
+                  <option value="4">4 th</option>
+                </select>
               </div>
+            </div>
 
-              <div class="form-row my-5 ">
+            <div class="form-row my-5 ">
               <div class="form-group col-md-6 ">
                 <label htmlFor="Participation">Participation</label>
                 <div class="form-check form-switch">
-                <div className="radioBtn">
-                <input type="checkbox" id="event" name="event" value="yes" checked={checked} onClick={revert} />
-              <label htmlFor="event" className="workShopTxt">Events (24.02.2024)
-              </label>
-              <br />
-            </div>
+                  <div className="radioBtn">
+                    <input
+                      type="checkbox"
+                      id="event"
+                      name="event"
+                      value="yes"
+                      checked={checked}
+                      onClick={revert}
+                    />
+                    <label htmlFor="event" className="workShopTxt">
+                      Events (24.02.2024)
+                    </label>
+                    <br />
+                  </div>
                 </div>
                 <div class="form-check form-switch">
-                <input
-                type="checkbox"
-                id="workshop"
-                name="workshop"
-                value="workshop"
-                className="workselect"
-                checked={checked2}
-                onClick={revert2}
-              />
-              <label htmlFor="workshop" className="workShopTxt">
-                Workshop (23.02.2024)
-              </label>
+                  <input
+                    type="checkbox"
+                    id="workshop"
+                    name="workshop"
+                    value="workshop"
+                    className="workselect"
+                    checked={checked2}
+                    onClick={revert2}
+                  />
+                  <label htmlFor="workshop" className="workShopTxt">
+                    Workshop (23.02.2024)
+                  </label>
                 </div>
               </div>
               <div class="form-group col-md-6">
-                  <label for="payment">Payment Type</label>
-                  <select class="form-control" onChange={(e) => setSelectedPayment(e.target.value)} >
-                    <option value="" selected disabled>Select Year</option>
-                    <option value="online">Online</option>
-                    <option value="cash">Cash</option>
-                    
-                    
-                  </select>
-                </div>
-              
-
+                <label for="payment">Payment Type</label>
+                <select
+                  class="form-control"
+                  onChange={(e) => setSelectedPayment(e.target.value)}
+                >
+                  <option value="" selected disabled>
+                    Select Year
+                  </option>
+                  <option value="online">Online</option>
+                  <option value="cash">Cash</option>
+                </select>
               </div>
+            </div>
 
-              <div className="form-row my-3">
+            <div className="form-row my-3">
               <div className="form-group col-md-6 ">
                 <div
                   className="hiddenDiv1"
@@ -258,7 +309,10 @@ const Register = () => {
                           checked={selectedWorkshops === "web_development"}
                           onChange={handleWorkshopChange}
                         />
-                        <label htmlFor="web_development" className="workShopTxt">
+                        <label
+                          htmlFor="web_development"
+                          className="workShopTxt"
+                        >
                           Web Development
                         </label>
                         <br />
@@ -284,38 +338,38 @@ const Register = () => {
                 </div>
               </div>
               <div className="form-group col-md-6">
-                  {(checked || checked2) && !(checked && checked2) && (
-                    <>
-                      {checked && (
-                        <img
-                          style={{ height: "250px", width: "250px" }}
-                          src={eventQR}
-                          alt="Event QR Code"
-                        />
-                      )}
-                      {checked2 && (
-                        <img
-                          style={{ height: "250px", width: "250px" }}
-                          src={workshopQR}
-                          alt="Workshop QR Code"/>
-                        )}
-                    </>
-                  )}
-                  {checked && checked2 && (
-                    <img
-                      style={{ height: "250px", width: "250px" }}
-                      src={workshopEventsQr}
-                      alt="Workshop and Event QR Code"
-                    />
-                  )}
-                </div>
-
+                {(checked || checked2) && !(checked && checked2) && (
+                  <>
+                    {checked && (
+                      <img
+                        style={{ height: "250px", width: "250px" }}
+                        src={eventQR}
+                        alt="Event QR Code"
+                      />
+                    )}
+                    {checked2 && (
+                      <img
+                        style={{ height: "250px", width: "250px" }}
+                        src={workshopQR}
+                        alt="Workshop QR Code"
+                      />
+                    )}
+                  </>
+                )}
+                {checked && checked2 && (
+                  <img
+                    style={{ height: "250px", width: "250px" }}
+                    src={workshopEventsQr}
+                    alt="Workshop and Event QR Code"
+                  />
+                )}
+              </div>
             </div>
 
-
-
-
-            <button className="submitBtn btn btn-primary btn-block" id="nextBtn">
+            <button
+              className="submitBtn btn btn-primary btn-block"
+              id="nextBtn"
+            >
               NEXT
             </button>
             <br />
@@ -353,9 +407,8 @@ const Register = () => {
               alt=""
             />
           </div> */}
-        
+        </div>
       </div>
-    </div>
     </div>
   );
 };
