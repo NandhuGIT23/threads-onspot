@@ -89,7 +89,7 @@ const Register = () => {
     });
     console.log(details);
     if (response) {
-      alert("successful");
+      alert(response.msgg);
     }
   };
 

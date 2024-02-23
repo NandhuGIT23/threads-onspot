@@ -6,7 +6,6 @@ const XLSX = require("xlsx");
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-  
   console.log("register route");
 
   const details = ({
@@ -92,9 +91,9 @@ router.post("/register", async (req, res) => {
         );
       }
 
-      if (user.selectedEvents == 'true') {
-      res.json({ mssg: "You have already registered for events" });
-      } 
+      if (user.selectedEvents == "true") {
+        res.json({ mssg: "You have already registered for events" });
+      }
 
       // if (user.selectedEvents == "true" && user.selectedWorkshops != "false") {
       //   return res.json({
@@ -111,7 +110,6 @@ router.post("/register", async (req, res) => {
     //   flag: true,
     // });
   } else {
-    
     try {
       // if (workshop == "uiux") {
       //   if (uiuxc > 100) {
