@@ -87,10 +87,20 @@ const Register = () => {
         "Content-Type": "application/json",
       },
     });
-    console.log(details);
-    if (response) {
-      alert(response.msgg);
-    }
+    response.json()
+      .then((responseJson) => {
+        console.log(responseJson);
+        if (responseJson) {
+          alert(responseJson.msgg);
+        } else {
+          alert("failed");
+        }
+      })
+
+    // console.log(details);
+    // if (response) {
+    //   alert(response.msgg);
+    // }
   };
 
   return (

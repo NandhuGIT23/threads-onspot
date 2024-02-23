@@ -92,7 +92,7 @@ router.post("/register", async (req, res) => {
       }
 
       if (user.selectedEvents == "true") {
-        res.json({ mssg: "You have already registered for events" });
+        res.json({ msgg: "You have already registered for events" });
       }
 
       // if (user.selectedEvents == "true" && user.selectedWorkshops != "false") {
