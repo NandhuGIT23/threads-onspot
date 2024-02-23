@@ -6,7 +6,7 @@ const XLSX = require("xlsx");
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-  console.log(req.body);
+  
   console.log("register route");
 
   const details = ({
@@ -111,7 +111,7 @@ router.post("/register", async (req, res) => {
     //   flag: true,
     // });
   } else {
-    console.log("ELSE BLOCK");
+    
     try {
       // if (workshop == "uiux") {
       //   if (uiuxc > 100) {
@@ -160,8 +160,7 @@ router.post("/register", async (req, res) => {
         selectedYear,
         selectedPayment,
       });
-      console.log("Line 155 created");
-      if (approval) console.log("Approval created");
+      console.log("approved: ", approval);
 
       res.status(200).json({
         msgg: "Successfully registered!",

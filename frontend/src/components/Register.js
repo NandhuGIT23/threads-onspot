@@ -80,7 +80,7 @@ const Register = () => {
     };
     console.log(details);
 
-    const response = await fetch("http://localhost:4000/admin/register", {
+    const response = await fetch("https://threads-onspot.onrender.com/admin/register", {
       method: "POST",
       body: JSON.stringify(details),
       headers: {
